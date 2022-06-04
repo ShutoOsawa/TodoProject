@@ -4,7 +4,10 @@
     <div class="w-64 bg-gray-50 border-r border-gray-200">
 
       <div class="py-4 px-6">
+        <router-link to="/"
+                     class="flex items-center text-gray-500 hover:text-orange-600 group">
         <img :src="ApplicationLogo" class="w-full h-9"/>
+        </router-link>
       </div>
 
       <div class="mb-10">

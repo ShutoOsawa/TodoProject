@@ -1,12 +1,12 @@
 <template>
 
   <div class="flex min-h-screen">
-    <div class="w-64 bg-gray-50 border-r border-gray-200">
+    <div class="w-80 bg-gray-50 border-r border-gray-200">
 
-      <div class="py-4 px-6">
+      <div>
         <router-link to="/"
                      class="flex items-center text-gray-500 hover:text-orange-600 group">
-        <img :src="ApplicationLogo" class="w-full h-9"/>
+        <img :src="ApplicationLogo" class="w-full h-54"/>
         </router-link>
       </div>
 
@@ -43,7 +43,7 @@
 <script>
 
 import {HomeIcon,CalendarIcon} from '@heroicons/vue/outline';
-import ApplicationLogo from '@/assets/logo.png';
+import ApplicationLogo from '@/assets/soup_n_toh.png';
 
 export default {
   components: {HomeIcon,CalendarIcon},

@@ -2,17 +2,19 @@
   <div class="container mx-auto">
     <h1 class="mt-8 text-2xl">Bar Graph</h1>
   </div>
-  <Bar
-      :chart-options="chartOptions"
-      :chart-data="chartData"
-      :chart-id="chartId"
-      :dataset-id-key="datasetIdKey"
-      :plugins="plugins"
-      :css-classes="cssClasses"
-      :styles="styles"
-      :width="width"
-      :height="height"
-  />
+  <div class="w-80">
+    <Bar
+        :chart-options="chartOptions"
+        :chart-data="chartData"
+        :chart-id="chartId"
+        :dataset-id-key="datasetIdKey"
+        :plugins="plugins"
+        :css-classes="cssClasses"
+        :styles="styles"
+        :width="width"
+        :height="height"
+    />
+  </div>
 </template>
 
 <script>

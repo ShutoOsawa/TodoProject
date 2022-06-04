@@ -23,12 +23,21 @@
               Home
         </router-link>
 
+
         <router-link to="/todo"
                      class="flex items-center px-6 py-2.5 text-gray-500 hover:text-orange-600 group">
           <component
               :is="CalendarIcon"
               class="h-5 w-5 text-gray-400 mr-2 group-hover:text-orange-500"/>
           Todo
+        </router-link>
+
+        <router-link to="/graph"
+                     class="flex items-center px-6 py-2.5 text-gray-500 hover:text-orange-600 group">
+          <component
+              :is="CalendarIcon"
+              class="h-5 w-5 text-gray-400 mr-2 group-hover:text-orange-500"/>
+          Graph
         </router-link>
     </div>
   </div>

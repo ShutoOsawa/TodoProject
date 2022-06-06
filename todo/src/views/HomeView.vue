@@ -2,7 +2,7 @@
   <div class="container mx-auto">
     <h1 class="mt-8 text-2xl">Home</h1>
 
-  <div id="app" class="min-h-screen w-screen bg-gray-200 flex items-center justify-center">
+  <div id="app" class="min-h-screen bg-gray-200 flex items-center justify-center">
     <vue-draggable-next tag="ul" ghost-class="moving-card" filter=".action-button" class="w-full max-w-md" :list="users" :animation="200">
       <li v-for="user in users"
           :key="user.id"

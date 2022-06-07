@@ -47,6 +47,22 @@
               class="h-5 w-5 text-gray-400 text-2xl mr-2 group-hover:text-orange-500"/>
           APIFetch
         </router-link>
+
+        <router-link to="/gridview"
+                     class="flex items-center text-2xl px-6 py-2.5 text-gray-500 hover:text-orange-600 group">
+          <component
+              :is="CalendarIcon"
+              class="h-5 w-5 text-gray-400 text-2xl mr-2 group-hover:text-orange-500"/>
+          GridView
+        </router-link>
+
+        <router-link to="/dragdropview"
+                     class="flex items-center text-2xl px-6 py-2.5 text-gray-500 hover:text-orange-600 group">
+          <component
+              :is="CalendarIcon"
+              class="h-5 w-5 text-gray-400 text-2xl mr-2 group-hover:text-orange-500"/>
+          DragDropView
+        </router-link>
     </div>
   </div>
 

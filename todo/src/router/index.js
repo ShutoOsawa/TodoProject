@@ -31,6 +31,24 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/APIFetchView.vue')
   }
+  ,
+  {
+    path: '/gridview',
+    name: 'gridview',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/GridView.vue')
+  }
+  ,
+  {
+    path: '/dragdropview',
+    name: 'dragdropview',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/DragDropView.vue')
+  }
 ]
 
 const router = createRouter({

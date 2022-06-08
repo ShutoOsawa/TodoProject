@@ -49,6 +49,15 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/DragDropView.vue')
   }
+  ,
+  {
+    path: '/dndview',
+    name: 'dndview',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/DnDView.vue')
+  }
 ]
 
 const router = createRouter({

@@ -1,99 +1,47 @@
 <template>
-  <div class="groups">
-    <div class="group">
-      <Container group-name="1" :get-child-payload="getChildPayload1" @drop="onDrop('items1', $event)">
-        <Draggable v-for="item in items1" :key="item.id">
-          <div class="draggable-item">
-            {{item.data}}
-          </div>
-        </Draggable>
-      </Container>
+  <div id="app" class="bg-gray-200items-center">
+  <vue-draggable-next tag="ul" ghost-class="moving-card" filter=".action-button" class="flex flex-row flex-wrap w-full max-w-md" :list="users" :animation="200">
+    <div v-for="user in users"
+         :key="user.id"
+         class=" w-40 h-40 bg-white shadow-md rounded m-2 flex justify-center items-center text-lg text-gray-700"
+         >
+      {{user.name}}
     </div>
-    <div class="group">
-      <Container group-name="1" :get-child-payload="getChildPayload2" @drop="onDrop('items2', $event)">
-        <Draggable v-for="item in items2" :key="item.id">
-          <div class="draggable-item">
-            {{item.data}}
-          </div>
-        </Draggable>
-      </Container>
-    </div>
-    <div class="group">
-      <Container group-name="1" :get-child-payload="getChildPayload3" @drop="onDrop('items3', $event)">
-        <Draggable v-for="item in items3" :key="item.id">
-          <div class="draggable-item">
-            {{item.data}}
-          </div>
-        </Draggable>
-      </Container>
-    </div>
-    <div class="group">
-      <Container group-name="1" :get-child-payload="getChildPayload4" @drop="onDrop('items4', $event)">
-        <Draggable v-for="item in items4" :key="item.id">
-          <div class="draggable-item">
-            {{item.data}}
-          </div>
-        </Draggable>
-      </Container>
-    </div>
+    </vue-draggable-next>
   </div>
 </template>
 
 <script>
-import { Container, Draggable } from 'vue3-smooth-dnd'
-import { applyDrag, generateItems } from '../utils/helpers'
-export default {
-  name: 'GroupsView',
-  components: {Container, Draggable},
-  data () {
+import {defineComponent ,ref} from "vue";
+import { EditIcon, Trash2Icon } from "vue-feather-icons";
+import { VueDraggableNext } from 'vue-draggable-next';
+export default defineComponent({
+  components: {VueDraggableNext},
+  setup() {
+    let users = ref([{id: "1", name: "1",avatar: "https://pickaface.net/gallery/avatar/unr_sample_161118_2054_ynlrg.png"},
+      {id:"2",name:"2"},
+      {id:"3",name:"3"},
+      {id:"4",name:"4"},
+      {id:"5",name:"5"},
+      {id:"6",name:"6"},
+      {id:"7",name:"7"},
+      {id:"8",name:"8"},
+      {id:"9",name:"9"},
+      {id:"10",name:"10"},
+      {id:"11",name:"11"},
+      {id:"12",name:"12"},
+      {id:"13",name:"13"}
+    ])
+
+
     return {
-      items1: generateItems(15, i => ({
-        id: '1' + i,
-        data: `Draggable 1 - ${i}`
-      })),
-      items2: generateItems(15, i => ({
-        id: '2' + i,
-        data: `Draggable 2 - ${i}`
-      })),
-      items3: generateItems(15, i => ({
-        id: '3' + i,
-        data: `Draggable 3 - ${i}`
-      })),
-      items4: generateItems(15, i => ({
-        id: '4' + i,
-        data: `Draggable 3 - ${i}`
-      }))
-    }
-  },
-  methods: {
-    onDrop (collection, dropResult) {
-      this[collection] = applyDrag(this[collection], dropResult)
-    },
-    getChildPayload1 (index) {
-      return this.items1[index]
-    },
-    getChildPayload2 (index) {
-      return this.items2[index]
-    },
-    getChildPayload3 (index) {
-      return this.items3[index]
-    },
-    getChildPayload4 (index) {
-      return this.items4[index]
-    }
-  }
+      VueDraggableNext,
+      EditIcon,
+      Trash2Icon,
+      users,
 }
+  }
+});
 </script>
 
-<style lang="css" scoped>
-.groups {
-  display: flex;
-  justify-content: stretch;
-  margin-top: 50px;
-  margin-right: 50px;
-}
-.group {
-  margin-left: 50px;
-  flex: 1;
-}
-</style>
+

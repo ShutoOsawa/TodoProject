@@ -2,7 +2,7 @@
   <div class="container mx-auto">
     <h1 class="mt-8 text-2xl">Home</h1>
 
-  <div id="app" class="min-h-screen bg-gray-200 flex items-center justify-center">
+  <div id="app" class="min-h-screen  flex  bg-gray-200items-center justify-center">
     <vue-draggable-next tag="ul" ghost-class="moving-card" filter=".action-button" class="w-full max-w-md" :list="users" :animation="200">
       <li v-for="user in users"
           :key="user.id"
@@ -25,6 +25,7 @@
           replace
         </button>
       </li>
+
       </vue-draggable-next>
   </div>
 
@@ -41,6 +42,10 @@ export default defineComponent({
     let users = ref([{id: "1", name: "toh",avatar: "https://pickaface.net/gallery/avatar/unr_sample_161118_2054_ynlrg.png"},
       {id:"2",name:"soup"},
       {id:"3",name:"soups"},
+      {id:"4",name:"soup"},
+      {id:"5",name:"soups"},
+      {id:"6",name:"soup"},
+      {id:"7",name:"soups"}
       ])
 
     function onEdit(user){
@@ -54,7 +59,11 @@ export default defineComponent({
     function onReplace(){
       users.value = [{id: "1", name: "toh",avatar: "https://pickaface.net/gallery/avatar/unr_sample_161118_2054_ynlrg.png"},
         {id:"2",name:"soup"},
-        {id:"3",name:"soups"}];
+        {id:"3",name:"soups"},
+        {id:"4",name:"soup"},
+        {id:"5",name:"soups"},
+        {id:"6",name:"soup"},
+        {id:"7",name:"soups"}];
     }
 
     return {

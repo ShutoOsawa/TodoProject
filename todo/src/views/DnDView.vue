@@ -1,5 +1,7 @@
 <template>
   <div id="app" class="container mx-auto bg-gray-200items-center">
+    <button v-on:click="getValue">Get value</button>
+    <button v-on:click="addCard">add</button>
   <vue-draggable-next tag="ul" ghost-class="moving-card" filter=".action-button" class="grid gap-4 grid-cols-3 w-full max-w-lg" :list="users" :animation="200">
     <div v-for="user in users"
          :key="user.id"
@@ -33,8 +35,16 @@ export default defineComponent({
       {id:"13",name:"13"}
     ])
 
+    function getValue(){
+      console.log(users.value)
+    }
+    function addCard(){
+      users.value.push({id:"3",name:"2"})
+    }
 
     return {
+      addCard,
+      getValue,
       VueDraggableNext,
       EditIcon,
       Trash2Icon,

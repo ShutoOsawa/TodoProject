@@ -1,4 +1,10 @@
 <template>
+
+  <div class="home">
+    <h1>DropZone</h1>
+    <DropZone @drop.prevent="drop" @change="selectedFile" />
+    <span class="file-info">File: {{ dropzoneFile.name }}</span>
+  </div>
   <div id="app" class="container mx-auto bg-gray-200items-center">
     <button v-on:click="getValue" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Get value</button>
     <button v-on:click="addCard" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">add</button>
@@ -10,9 +16,13 @@
                         :list="lst" :animation="200">
             <div  v-for="(item,index) in lst"
              :key=index
-             class="w-40 h-40 bg-white shadow-md rounded m-2 flex justify-center items-center text-lg text-gray-700"
+             class="bg-white shadow-md border border-gray-200 rounded-lg max-w-sm"
              >
-            {{item.name}}
+              <img class="rounded-t-lg" :src="item.image" alt="">
+              <p class="text-gray-700 text-base">
+                {{item.name}}
+              </p>
+
             <button class="px-2 text-red-600"
                     @click="removeCategory(index)"
                     title="Remove todo">&times;</button>
@@ -24,45 +34,24 @@
 </template>
 
 <script>
+import DropZone from "@/components/DropZone.vue";
 import {defineComponent ,ref} from "vue";
-import { EditIcon, Trash2Icon } from "vue-feather-icons";
 import { VueDraggableNext } from 'vue-draggable-next';
+
 export default defineComponent({
-  components: {VueDraggableNext},
+  components: {VueDraggableNext,
+  DropZone},
   setup() {
 
-    let lst = ref([{id: "a", name: "a"},
-      {id:"b",name:"b"},
-      {id:"c",name:"c"},
-      {id:"d",name:"d"},
-      {id:"e",name:"e"},
-      {id:"f",name:"f", content:
-            [{id: "1", name: "1"},
-              {id:"2",name:"2"},
-              {id:"3",name:"3"},
-              {id:"4",name:"4"},
-            ]},
-    ])
-
-    let category = ref([{id: "a", name: "a",content:[]},
-      {id:"b",name:"b",content:[]},
-      {id:"c",name:"c",content:[]},
-      {id:"d",name:"d",content:[]},
-        {id:"e",name:"e",content:[]},
-        {id:"f",name:"f", content:
-              [{id: "1", name: "1"},
-                {id:"2",name:"2"},
-                {id:"3",name:"3"},
-                {id:"4",name:"4"},
-                ]},
-      ])
+    let lst = ref([])
+    let category = ref([])
 
     function returnButton(){
       console.log(category.value)
       lst.value = category.value
     }
     function getValue(){
-      console.log(category.value)
+      console.log(lst.value)
     }
 
     function removeCategory(index){
@@ -71,25 +60,36 @@ export default defineComponent({
       //}
       console.log(index)
       lst.value.splice(index,1);
-      /** alert('removed');*/
     }
-    let depth = ref(0)
-   // let contentloc = 0
 
     function changeData(index){
-      console.log(category.value[index])
-      lst.value = category.value[index]["content"]
-      depth.value += 1
-    //  contentloc = index
+      console.log(lst.value)
+      console.log(index)
+      lst.value = category.value[index].content
     }
 
     function addCard(){
-      lst.value.push({id: "add", name: "added"})
-      console.log(category)
-
+      lst.value.push({id: "add", name: "added", image: "", content: []})
+      console.log(lst.value)
+      category.value=  lst.value
     }
+    let dropzonePath = ref("")
+    let dropzoneFile = ref("")
+
+    const drop = (e) => {
+      dropzoneFile.value = e.dataTransfer.files[0];
+      dropzonePath.value = URL.createObjectURL(e.dataTransfer.files[0]);
+      lst.value.push({id: dropzoneFile.value, name: dropzoneFile.value,image: dropzonePath.value, content: []})
+    };
+
+    const selectedFile = () => {
+      dropzoneFile.value = document.querySelector(".dropzoneFile").files[0];
+      dropzonePath.value = URL.createObjectURL(document.querySelector(".dropzoneFile").files[0]);
+      lst.value.push({id: dropzoneFile.value.name, name: dropzoneFile.value.name,image: dropzonePath.value, content: []})
+    };
 
     return {
+      dropzoneFile, drop, selectedFile,
       lst,
       returnButton,
       changeData,
@@ -98,9 +98,7 @@ export default defineComponent({
       addCard,
       getValue,
       VueDraggableNext,
-      EditIcon,
-      Trash2Icon,
-}
+  }
   }
 });
 </script>

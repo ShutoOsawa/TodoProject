@@ -1,16 +1,23 @@
 <template>
   <div id="app" class="container mx-auto bg-gray-200items-center">
-    <button v-on:click="getValue">Get value</button>
-    <button v-on:click="addCard">add</button>
-  <vue-draggable-next tag="ul" ghost-class="moving-card" filter=".action-button" class="grid gap-4 grid-cols-3 w-full max-w-lg" :list="users" :animation="200">
-    <div v-for="user in users"
-         :key="user.id"
-         class=" w-40 h-40 bg-white shadow-md rounded m-2 flex justify-center items-center text-lg text-gray-700"
-         >
-      {{user.name}}
+    <button v-on:click="getValue" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Get value</button>
+    <button v-on:click="addCard" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">add</button>
+    <button v-on:click="returnButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">return</button>
+
+    <vue-draggable-next tag="ul" ghost-class="moving-card" filter=".action-button" class="grid gap-4 grid-cols-3 w-full max-w-lg" :list="category" :animation="200">
+            <div  v-for="(item,index) in category"
+             :key=index
+             class="w-40 h-40 bg-white shadow-md rounded m-2 flex justify-center items-center text-lg text-gray-700"
+             >
+            {{item.name}}
+            <button class="px-2 text-red-600"
+                    @click="removeCategory(index)"
+                    title="Remove todo">&times;</button>
+            <button @click="changeData(index)"
+                    class="px-2 text-green-600" title="Mark as done">&check;</button>
+          </div>
+        </vue-draggable-next>
     </div>
-    </vue-draggable-next>
-  </div>
 </template>
 
 <script>
@@ -20,35 +27,59 @@ import { VueDraggableNext } from 'vue-draggable-next';
 export default defineComponent({
   components: {VueDraggableNext},
   setup() {
-    let users = ref([{id: "1", name: "1",avatar: "https://pickaface.net/gallery/avatar/unr_sample_161118_2054_ynlrg.png"},
-      {id:"2",name:"2"},
-      {id:"3",name:"3"},
-      {id:"4",name:"4"},
-      {id:"5",name:"5"},
-      {id:"6",name:"6"},
-      {id:"7",name:"7"},
-      {id:"8",name:"8"},
-      {id:"9",name:"9"},
-      {id:"10",name:"10"},
-      {id:"11",name:"11"},
-      {id:"12",name:"12"},
-      {id:"13",name:"13"}
-    ])
 
-    function getValue(){
-      console.log(users.value)
+    let category = ref([{id: "a", name: "a"},
+      {id:"b",name:"b"},
+      {id:"c",name:"c"},
+      {id:"d",name:"d"},
+        {id:"e",name:"e"},
+        {id:"f",name:"f", content:
+              [{id: "1", name: "1"},
+                {id:"2",name:"2"},
+                {id:"3",name:"3"},
+                {id:"4",name:"4"},
+                ]},
+      ])
+    function returnButton(){
+      console.log(category.value)
     }
+    function getValue(){
+      console.log(category.value)
+    }
+
+    function removeCategory(index){
+     // if(!confirm("Are you sure?")){
+      //  return;
+      //}
+      category.value.splice(index,1);
+      /** alert('removed');*/
+    }
+    let depth = ref(0)
+   // let contentloc = 0
+    function changeData(index){
+      console.log(category.value[index])
+
+      depth.value += 1
+    //  contentloc = index
+    }
+
     function addCard(){
-      users.value.push({id:"3",name:"2"})
+      category.value.push({id: "add", name: "added"})
+      console.log(category)
+
     }
 
     return {
+      depth,
+      returnButton,
+      changeData,
+      removeCategory,
+      category,
       addCard,
       getValue,
       VueDraggableNext,
       EditIcon,
       Trash2Icon,
-      users,
 }
   }
 });

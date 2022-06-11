@@ -23,7 +23,6 @@
         <slot>
           <strong>Upload File</strong>
         </slot>
-
         <!--
         * Print out the file name so the user gets the feedback that the input accepted the file appropriately
         * This is really the only part that relies on Vue,

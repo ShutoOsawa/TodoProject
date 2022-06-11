@@ -4,8 +4,11 @@
     <button v-on:click="addCard" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">add</button>
     <button v-on:click="returnButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">return</button>
 
-    <vue-draggable-next tag="ul" ghost-class="moving-card" filter=".action-button" class="grid gap-4 grid-cols-3 w-full max-w-lg" :list="category" :animation="200">
-            <div  v-for="(item,index) in category"
+    <vue-draggable-next tag="ul" ghost-class="moving-card"
+                        filter=".action-button"
+                        class="grid gap-4 grid-cols-3 w-full max-w-lg"
+                        :list="lst" :animation="200">
+            <div  v-for="(item,index) in lst"
              :key=index
              class="w-40 h-40 bg-white shadow-md rounded m-2 flex justify-center items-center text-lg text-gray-700"
              >
@@ -28,11 +31,24 @@ export default defineComponent({
   components: {VueDraggableNext},
   setup() {
 
-    let category = ref([{id: "a", name: "a"},
+    let lst = ref([{id: "a", name: "a"},
       {id:"b",name:"b"},
       {id:"c",name:"c"},
       {id:"d",name:"d"},
-        {id:"e",name:"e"},
+      {id:"e",name:"e"},
+      {id:"f",name:"f", content:
+            [{id: "1", name: "1"},
+              {id:"2",name:"2"},
+              {id:"3",name:"3"},
+              {id:"4",name:"4"},
+            ]},
+    ])
+
+    let category = ref([{id: "a", name: "a",content:[]},
+      {id:"b",name:"b",content:[]},
+      {id:"c",name:"c",content:[]},
+      {id:"d",name:"d",content:[]},
+        {id:"e",name:"e",content:[]},
         {id:"f",name:"f", content:
               [{id: "1", name: "1"},
                 {id:"2",name:"2"},
@@ -40,8 +56,10 @@ export default defineComponent({
                 {id:"4",name:"4"},
                 ]},
       ])
+
     function returnButton(){
       console.log(category.value)
+      lst.value = category.value
     }
     function getValue(){
       console.log(category.value)
@@ -51,26 +69,28 @@ export default defineComponent({
      // if(!confirm("Are you sure?")){
       //  return;
       //}
-      category.value.splice(index,1);
+      console.log(index)
+      lst.value.splice(index,1);
       /** alert('removed');*/
     }
     let depth = ref(0)
    // let contentloc = 0
+
     function changeData(index){
       console.log(category.value[index])
-
+      lst.value = category.value[index]["content"]
       depth.value += 1
     //  contentloc = index
     }
 
     function addCard(){
-      category.value.push({id: "add", name: "added"})
+      lst.value.push({id: "add", name: "added"})
       console.log(category)
 
     }
 
     return {
-      depth,
+      lst,
       returnButton,
       changeData,
       removeCategory,

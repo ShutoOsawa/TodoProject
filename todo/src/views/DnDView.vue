@@ -6,23 +6,21 @@
         @drop.prevent="drop" @change="selectedFile" />
     <span class="file-info">File: {{ dropzoneFile.name }}</span>
   </div>
-  <TestComponent />
   <ItemList />
+
 
 
 </template>
 
 <script>
 import DropZone from "@/components/DropZone.vue";
-import ItemList from "@/components/ItemList.vue";
 import {defineComponent ,ref} from "vue";
-import TestComponent from "@/components/TestComponent.vue";
+import ItemList from "@/components/ItemList.vue";
 
 export default defineComponent({
   components: {
   DropZone,
-  ItemList,
-  TestComponent},
+  ItemList},
   setup() {
 
     let dropzonePath = ref("")
@@ -42,7 +40,6 @@ export default defineComponent({
 
     return {
       dropzoneFile, drop, selectedFile,
-      ItemList
   }
   }
 });

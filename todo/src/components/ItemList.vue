@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import {onMounted, ref} from "vue/dist/vue";
+import {onMounted, ref} from "vue";
 import {VueDraggableNext} from "vue-draggable-next";
 
 export default {

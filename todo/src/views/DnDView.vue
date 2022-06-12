@@ -35,7 +35,8 @@
 
 <script>
 import DropZone from "@/components/DropZone.vue";
-import {defineComponent ,ref} from "vue";
+import {defineComponent ,ref,onMounted} from "vue";
+
 import { VueDraggableNext } from 'vue-draggable-next';
 
 export default defineComponent({
@@ -45,6 +46,10 @@ export default defineComponent({
 
     let lst = ref([])
     let category = ref([])
+
+    onMounted(() => {
+      lst.value = category.value
+    })
 
     function returnButton(){
       console.log(category.value)

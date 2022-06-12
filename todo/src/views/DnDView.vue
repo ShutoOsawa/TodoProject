@@ -1,10 +1,6 @@
 <template>
 
-  <div class="home">
-    <h1>DropZone</h1>
-    <DropZone @drop.prevent="drop" @change="selectedFile" />
-    <span class="file-info">File: {{ dropzoneFile.name }}</span>
-  </div>
+
   <div id="app" class="container mx-auto bg-gray-200items-center">
     <button v-on:click="getValue" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Get value</button>
     <button v-on:click="addCard" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">add</button>
@@ -31,6 +27,11 @@
           </div>
         </vue-draggable-next>
     </div>
+
+  <div class="home">
+    <h1>DropZone</h1>
+    <DropZone @drop.prevent="drop" @change="selectedFile" />
+  </div>
 </template>
 
 <script>
@@ -51,61 +52,66 @@ export default defineComponent({
       lst.value = category.value
     })
 
-    function returnButton(){
+    function returnButton() {
       console.log(category.value)
       lst.value = category.value
     }
-    function getValue(){
+
+    function getValue() {
       console.log(lst.value)
     }
 
-    function removeCategory(index){
-     // if(!confirm("Are you sure?")){
+    function removeCategory(index) {
+      // if(!confirm("Are you sure?")){
       //  return;
       //}
       console.log(index)
-      lst.value.splice(index,1);
+      lst.value.splice(index, 1);
     }
 
-    function changeData(index){
+    function changeData(index) {
       console.log(lst.value)
       console.log(index)
       lst.value = category.value[index].content
     }
 
-    function addCard(){
+    function addCard() {
       lst.value.push({id: "add", name: "added", image: "", content: []})
       console.log(lst.value)
       //category.value=  lst.value
     }
-    let dropzonePath = ref("")
-    let dropzoneFile = ref("")
 
-      const drop = (e) => {
-      dropzoneFile.value = e.dataTransfer.files[0];
-      dropzonePath.value = URL.createObjectURL(e.dataTransfer.files[0]);
-      lst.value.push({id: dropzoneFile.value, name: dropzoneFile.value,image: dropzonePath.value, content: []})
+    const drop = (e) => {
+      Array.from(e.dataTransfer.files).forEach(item => {
+        console.log(item)
+        lst.value.push({id: item.name, name: item.name, image: URL.createObjectURL(item), content: []})
+      })
+      //lst.value.push({id: dropzoneFile.value.name, name: dropzoneFile.value.name,image: dropzonePath.value, content: []})
     };
 
     const selectedFile = () => {
-      dropzoneFile.value = document.querySelector(".dropzoneFile").files[0];
-      dropzonePath.value = URL.createObjectURL(document.querySelector(".dropzoneFile").files[0]);
-      lst.value.push({id: dropzoneFile.value.name, name: dropzoneFile.value.name,image: dropzonePath.value, content: []})
-    };
+      // dropzoneFile.value = document.querySelector(".dropzoneFile").files[0];
+      // dropzonePath.value = URL.createObjectURL(document.querySelector(".dropzoneFile").files[0]);
+      // lst.value.push({id: dropzoneFile.value.name, name: dropzoneFile.value.name,image: dropzonePath.value, content: []})
+      Array.from(document.querySelector(".dropzoneFile").files).forEach(item => {
+        console.log(item)
+        lst.value.push({id: item.name, name: item.name, image: URL.createObjectURL(item), content: []})
+      })
+    }
 
-    return {
-      dropzoneFile, drop, selectedFile,
-      lst,
-      returnButton,
-      changeData,
-      removeCategory,
-      category,
-      addCard,
-      getValue,
-      VueDraggableNext,
-  }
-  }
-});
+      return {
+        drop, selectedFile,
+        lst,
+        returnButton,
+        changeData,
+        removeCategory,
+        category,
+        addCard,
+        getValue,
+        VueDraggableNext,
+      }
+    }
+  })
 </script>
 
 

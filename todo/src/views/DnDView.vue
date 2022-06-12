@@ -71,12 +71,12 @@ export default defineComponent({
     function addCard(){
       lst.value.push({id: "add", name: "added", image: "", content: []})
       console.log(lst.value)
-      category.value=  lst.value
+      //category.value=  lst.value
     }
     let dropzonePath = ref("")
     let dropzoneFile = ref("")
 
-    const drop = (e) => {
+      const drop = (e) => {
       dropzoneFile.value = e.dataTransfer.files[0];
       dropzonePath.value = URL.createObjectURL(e.dataTransfer.files[0]);
       lst.value.push({id: dropzoneFile.value, name: dropzoneFile.value,image: dropzonePath.value, content: []})

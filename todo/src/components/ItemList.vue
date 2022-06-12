@@ -33,10 +33,10 @@ import {VueDraggableNext} from "vue-draggable-next";
 
 export default {
   name: "ItemList",
-
+  //props: ['lst'],
   setup(){
-    let lst = ref([])
-    let category = ref([])
+    let lst = ref([{id:1, name:1}])
+    let category = ref([{id:1, name:1}])
 
     onMounted(() => {
       lst.value = category.value

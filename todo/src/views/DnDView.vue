@@ -14,8 +14,9 @@
 
 <script>
 import DropZone from "@/components/DropZone.vue";
-import {defineComponent ,ref} from "vue";
 import ItemList from "@/components/ItemList.vue";
+import {defineComponent ,ref} from "vue";
+
 
 export default defineComponent({
   components: {

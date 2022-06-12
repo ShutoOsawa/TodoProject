@@ -1,17 +1,19 @@
 <template>
-  <div
+     <div type="file"
       @dragenter.prevent="toggleActive"
       @dragleave.prevent="toggleActive"
       @dragover.prevent
       @drop.prevent="toggleActive"
-      :class="{ 'active-dropzone': active }"
-      class="dropzone"
-  >
+      :class="{ 'active-dropzone': active}"
+          class="dropzone"
+      >
     <span>Drag or Drop File</span>
     <span>OR</span>
     <label for="dropzoneFile">Select File</label>
     <input type="file" id="dropzoneFile" class="dropzoneFile" />
-  </div>
+
+     </div>
+
 </template>
 
 <script>
@@ -30,7 +32,7 @@ export default {
 
 <style scoped lang="scss">
 .dropzone {
-  width: 400px;
+  width: 200px;
   height: 200px;
   display: flex;
   flex-direction: column;
@@ -50,6 +52,7 @@ export default {
     display: none;
   }
 }
+
 .active-dropzone {
   color: #fff;
   border-color: #fff;

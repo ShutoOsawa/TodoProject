@@ -24,38 +24,44 @@
 </template>
 
 <script>
-import {defineComponent ,ref} from "vue";
+import {defineComponent ,ref,onMounted} from "vue";
 import { EditIcon, Trash2Icon } from "vue-feather-icons";
 import { VueDraggableNext } from 'vue-draggable-next';
 export default defineComponent({
   components: {VueDraggableNext},
   setup() {
 
-    let lst = ref([{id: "a", name: "a"},
-      {id:"b",name:"b"},
-      {id:"c",name:"c"},
-      {id:"d",name:"d"},
-      {id:"e",name:"e"},
-      {id:"f",name:"f", content:
-            [{id: "1", name: "1"},
-              {id:"2",name:"2"},
-              {id:"3",name:"3"},
-              {id:"4",name:"4"},
-            ]},
-    ])
+    let lst = ref([ ])
+    let category = ref([ ])
+    // let lst = ref([{id: "a", name: "a"},
+    //   {id:"b",name:"b"},
+    //   {id:"c",name:"c"},
+    //   {id:"d",name:"d"},
+    //   {id:"e",name:"e"},
+    //   {id:"f",name:"f", content:
+    //         [{id: "1", name: "1"},
+    //           {id:"2",name:"2"},
+    //           {id:"3",name:"3"},
+    //           {id:"4",name:"4"},
+    //         ]},
+    // ])
+    //
+    // let category = ref([{id: "a", name: "a",content:[]},
+    //   {id:"b",name:"b",content:[]},
+    //   {id:"c",name:"c",content:[]},
+    //   {id:"d",name:"d",content:[]},
+    //     {id:"e",name:"e",content:[]},
+    //     {id:"f",name:"f", content:
+    //           [{id: "1", name: "1"},
+    //             {id:"2",name:"2"},
+    //             {id:"3",name:"3"},
+    //             {id:"4",name:"4"},
+    //             ]},
+    //   ])
 
-    let category = ref([{id: "a", name: "a",content:[]},
-      {id:"b",name:"b",content:[]},
-      {id:"c",name:"c",content:[]},
-      {id:"d",name:"d",content:[]},
-        {id:"e",name:"e",content:[]},
-        {id:"f",name:"f", content:
-              [{id: "1", name: "1"},
-                {id:"2",name:"2"},
-                {id:"3",name:"3"},
-                {id:"4",name:"4"},
-                ]},
-      ])
+    onMounted(() => {
+      lst.value = category.value
+    })
 
     function returnButton(){
       console.log(category.value)
@@ -84,7 +90,8 @@ export default defineComponent({
     }
 
     function addCard(){
-      lst.value.push({id: "add", name: "added"})
+      lst.value.push({id: "add", name: "added",content: []})
+      //category.value.push({id: "add", name: "added",content: []})
       console.log(category)
 
     }
